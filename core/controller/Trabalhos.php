@@ -43,11 +43,11 @@ class Trabalhos
 
 
     public function listarTrabalhos($dados = []){
-        $evento = new Evento();
+        $trabalho = new Trabalho();
 
         $busca = isset($dados['busca']) ? $dados['busca'] : [];
 
-        $lista = $evento->listar(null, $busca, Trabalho::COL_TITULO . "ASC");
+        $lista = $trabalho->listar(null, $busca, Trabalho::COL_TITULO . " ASC ");
 
         
         if (count($lista) > 0){
@@ -55,7 +55,7 @@ class Trabalhos
         }
 
         return [
-            "lista_eventos" => $this->lista_trabalhos
-        ]
+            "lista_trabalhos" => $this->lista_trabalhos
+        ];
     }
 }
