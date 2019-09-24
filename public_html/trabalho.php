@@ -11,6 +11,10 @@ $trabalhos = new Trabalhos();
 $dados = [];
 $trabalhos = $trabalhos->listarTrabalhos($dados);
 
+if(!Autenticacao::verificarLogin()) {
+    header("Location: login.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

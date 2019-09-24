@@ -75,6 +75,7 @@ class Usuarios {
         }
 
         if ($resultado > 0 ) {
+            Autenticacao::login($dados['email'],$dados['senha'],true,false);
             return true;
         } else {
             return false;
