@@ -28,7 +28,7 @@ const eventos = () => {
                 success: function (res) {
                     if (res && res === '1') {
                         // $('#msg_sucesso').toast('show'); // Para aparecer a mensagem de sucesso
-                        alert("Logou");
+                        // alert("Logou");
                         window.location.href = './trabalhos.php';
                     } else {
                         alert('Usuário/senha inválidos!');
