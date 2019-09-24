@@ -5,6 +5,10 @@ require_once '../config.php';
 
 use core\sistema\Autenticacao;
 
+if(!Autenticacao::verificarLogin()) {
+    header("Location: login.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
