@@ -1,9 +1,9 @@
-create table `area tematica`
+create table area_tematica
 (
-  `idArea Tematica` int         not null
+  idAreaTematica int         not null
     primary key,
-  nome              varchar(45) null,
-  descricao         varchar(45) null
+  nome           varchar(45) null,
+  descricao      varchar(45) null
 )
   engine = InnoDB;
 
@@ -44,7 +44,7 @@ create table trabalho
   idModalidade    int          null,
   idUsuario       int          not null,
   constraint trabalho_ibfk_2
-  foreign key (idAreaTematica) references `area tematica` (`idArea Tematica`),
+  foreign key (idAreaTematica) references area_tematica (idAreaTematica),
   constraint trabalho_ibfk_1
   foreign key (idModalidade) references modalidade (idModalidade),
   constraint trabalho_ibfk_3
