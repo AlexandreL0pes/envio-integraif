@@ -4,6 +4,10 @@ require_once '../vendor/autoload.php';
 require_once '../config.php';
 
 use core\sistema\Autenticacao;
+// use core\controller\Trabalhos;
+
+// $trabalhos = new Trabalhos();
+// $trabalhos = $trabalhos->listarTrabalhos($evento_id);
 
 ?>
 <!DOCTYPE html>
@@ -108,7 +112,7 @@ use core\sistema\Autenticacao;
                 <!-- Heading -->
                 <h2 class="mb-5 font-weight-bold text-center">Envie seu Trabalho</h2>
 
-                <form id="formulario" class="needs-validation">
+                <form id="formulario" class="needs-validation" data-idUsuario="<?= Autenticacao::getCookieUsuario() ?>">
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="titulo">Título:</label>
@@ -119,14 +123,14 @@ use core\sistema\Autenticacao;
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="autores">Autores:</label>
-                            <input type="email" class="form-control" id="autores" value="" placeholder="Ex.: João Ferreira da Silva; Maria Silva Ferreira; " required>
+                            <input type="text" class="form-control" id="autores" value="" placeholder="Ex.: João Ferreira da Silva; Maria Silva Ferreira; " required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="modalidade">Modalidade:</label>
                             <div class="input-group">
-                                <select class="custom-select" id="inputGroupSelect04">
+                                <select class="custom-select" id="modalidade">
                                     <option selected disabled>Selecione uma opção</option>
-                                    <option value="0">Relato de Experiência</option>
+                                    <option value="2">Relato de Experiência</option>
                                     <option value="1">Resumo Expandido</option>
                                 </select>
                             </div>
@@ -135,13 +139,13 @@ use core\sistema\Autenticacao;
                     <hr>
                     <div class="form-row">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">Anexe seu Trabalho</label>
+                            <input type="file" class="custom-file-input" id="arquivo">
+                            <label class="custom-file-label" for="arquivo">Anexe seu Trabalho</label>
                             <small id="anexoHelpBlock" class="form-text text-muted">
                                 Seu trabalho precisa ser anexado apenas no formato ".pdf".
                             </small>
                         </div>
-                    </div>
+                    </div> <br>
                     <hr>
                     <div class="form-row">
                         <div class="offset-md-8 col-md-4">
@@ -205,6 +209,7 @@ use core\sistema\Autenticacao;
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script src="assets/js/index.js"></script>
+    <script src='assets/js/trabalho.js'></script>
 </body>
 
 </html>
