@@ -3,7 +3,7 @@
 
 namespace core\controller;
 
-use core\model\Evento;
+// use core\model\Evento;
 use core\model\Trabalho;
 
 class Trabalhos
@@ -36,26 +36,48 @@ class Trabalhos
      * Efetua o cadastro do trabalho no sistema, porém não tanto, já que todos os titulos e autores estão pre-cadastrados,
      * No caso esse método apenas adiciona ao banco o caminho do arquivo enviado e os status
      */
-    // public function cadastrar($dados){
+    public function atualizarDados($dados) {
+        $trabalho = new Trabalho();
 
-    // }
+        if (isset($dados['caminhoTrabalho'])) {
+            $pasta  = 'arquivos/';
+            $extensao = "." . pathinfo($dados['caminhoTrabalho'], PATHINFO_EXTENSION);
+            $novoNome = time() . md5(uniqid());
+            $arquivoServidor = $pasta . $novoNome . $extensao;
+            
+            echo "<pre>" . print_r($dados) . "</pre>";
+
+            if (move_uploaded_file($dados['tmp'], $arquivoServidor)) {
+                $dados[Trabalho::COL_CAMINHO_TRABALHO] = $arquivoServidor;
+                unset($dados['tmp']);
 
 
+                $trabalho->alterar($dados);
+                
+                echo "foi desgraçaaaaaaaaaaaaaaa";
 
-    public function listarTrabalhos($dados = []){
-        $evento = new Evento();
+                return $trabalho;
+            }
+        }
+
+        
+    }
+
+    public function listarTrabalhos($dados = []) {
+        $trabalho = new Trabalho();
 
         $busca = isset($dados['busca']) ? $dados['busca'] : [];
 
-        $lista = $evento->listar(null, $busca, Trabalho::COL_TITULO . "ASC");
+        $lista = $trabalho->listar(null, $busca, Trabalho::COL_TITULO . " ASC");
 
         
-        if (count($lista) > 0){
+        if (count($lista) > 0) {
             $this->__set("lista_trabalhos", $lista);       
         }
 
         return [
-            "lista_eventos" => $this->lista_trabalhos
-        ]
+            "lista_trabalhos" => $this->lista_trabalhos
+        ];
     }
+
 }

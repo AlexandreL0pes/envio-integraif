@@ -4,10 +4,12 @@ require_once '../vendor/autoload.php';
 require_once '../config.php';
 
 use core\sistema\Autenticacao;
-// use core\controller\Trabalhos;
+use core\controller\Trabalhos;
 
-// $trabalhos = new Trabalhos();
-// $trabalhos = $trabalhos->listarTrabalhos($evento_id);
+$trabalhos = new Trabalhos();
+
+$dados = [];
+$trabalhos = $trabalhos->listarTrabalhos($dados);
 
 ?>
 <!DOCTYPE html>
@@ -112,7 +114,7 @@ use core\sistema\Autenticacao;
                 <!-- Heading -->
                 <h2 class="mb-5 font-weight-bold text-center">Envie seu Trabalho</h2>
 
-                <form id="formulario" class="needs-validation" data-idUsuario="<?= Autenticacao::getCookieUsuario() ?>">
+                <form id="formulario" class="needs-validation" enctype="multipart/form-data" data-idUsuario="<?= Autenticacao::getCookieUsuario() ?>">
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="titulo">Título:</label>

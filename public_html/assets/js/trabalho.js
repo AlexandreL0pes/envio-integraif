@@ -5,23 +5,52 @@ let construct = () => {
 const eventos = () => {
     
     $('#formulario').on('submit', function (e) {
-        e.preventDefault();
+        e.preventDefault();       
+
         let titulo = $('#titulo').val(),
             autores = $('#autores').val(),
             modalidade = $('#modalidade').val(),
-            arquivo = $('#arquivo').val(),
-            idUsuario = $('#formulario').attr('data-idUsuario');
-
+            arquivo = $('#arquivo').prop('files')[0],
+            idUsuario = $('#formulario').attr('data-idUsuario');     
+        
         if (titulo !== "" &&
             autores !== "" &&
             modalidade !== "" &&
             arquivo !== ""
         ) {
+            
+            var form_data = new FormData();
+            
+            form_data.append('titulo', titulo);
+            form_data.append('statusImpressao', "Não intresso");
+            form_data.append('statusPagamento', null);
+            form_data.append('datahora', null);
+            form_data.append('caminhoTrabalho', arquivo);
+            form_data.append('idUsuario', idUsuario);
+            
+            console.log(form_data);            
+
+            $.ajax({
+                url: 'upload.php', // point to server-side PHP script 
+                dataType: 'text', // what to expect back from the PHP script, if anything
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function(php_script_response) {
+                    alert(php_script_response); // display response from the PHP script, if any
+                }
+            });
+            
+            /*
+            
             let dados = {
                 titulo: titulo,
-                autores: autores,
-                modalidade: modalidade,
-                arquivo: arquivo
+                statusImpressao: "Não intresso",
+                caminhoTrabalho: arquivo,
+                statusPagamento: null, 
+                datahora: null
             };
 
             if(idUsuario > 0){
@@ -30,7 +59,9 @@ const eventos = () => {
             } else{
                 dados.acao = "Usuarios/cadastrar";
             }
-    
+            
+            console.log(dados);  
+            
             $.ajax({
                 url: baseUrl,
                 type: "POST",
@@ -41,14 +72,14 @@ const eventos = () => {
                     if (res) {
                         // console.log(res);
                         // $('#msg_sucesso').toast('show'); // Para aparecer a mensagem de sucesso
-                        // alert("Cadastrou");
-                        window.location="trabalhos.php";
-                        $('#formulario').each(function () {
-                            this.reset(); // Pra limpar o formulário
-                        });
+                        alert(res);
+                        // window.location = "trabalhos.php";
+                        // $('#formulario').each(function () {
+                        //     this.reset(); // Pra limpar o formulário
+                        // });
                     } else {
-                        // alert("Não FOi");
-                        $('#msg_alerta').toast('show');
+                        alert("Não FOi" + res);
+                        // $('#msg_alerta').toast('show');
                     }
                 },
                 error: function (request, status, str_error) {
@@ -57,6 +88,7 @@ const eventos = () => {
             });
         } else{
             $('#msg_alerta').toast('show');
+        }*/
         }
     });
 };

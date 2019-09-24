@@ -25,6 +25,12 @@ class Requisicao {
             }
         }
 
+        // foreach ($_FILES as $index => $valor) {
+        //     $request["dados"][$index] = $_FILES[$index]['name'];
+        //     $request["dados"]['tmp'] = $_FILES[$index]['tmp_name'];
+        //     echo $index . "<br>";
+        // }
+
         // Pega os valores do $_GET
         foreach ($_GET as $index => $valor) {
             // Define a ação
