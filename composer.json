@@ -1,0 +1,24 @@
+{
+    "name": "envio/envio-integraif",
+    "description": "Uma aplica\u0000\u0000o para a impress\u0000o de trabalhos.",
+    "type": "project",
+    "config": {
+        "vendor-dir": "vendor",
+        "optimize-autoloader": true
+      },
+      "autoload": {
+        "psr-4": {
+          "envio-integraif\\": "public_html/",
+          "core\\": "core/"
+        }
+      },  
+    "authors": [
+        {
+            "name": "Alexandre",
+            "email": "alexandre9999lopes@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*"
+    }
+}

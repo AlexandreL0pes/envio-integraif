@@ -1,0 +1,28 @@
+html, body {
+    height: 100%;
+}
+
+
+a{
+    color:black; /* cor dos links */
+    text-decoration: none;  /* sem sublinhado */
+}
+.top-nav-collapse {
+    background-color: white;
+}
+
+@media (max-width: 768px) {
+    .navbar:not(.top-nav-collapse) {
+        background-color: white;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+    .navbar:not(.top-nav-collapse) {
+        background-color: white;
+    }
+}
+
+select{
+    width: auto;
+}
