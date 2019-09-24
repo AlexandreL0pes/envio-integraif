@@ -1,0 +1,2 @@
+INSERT INTO `envio-integraif`.modalidade (idModalidade, nome, descricao) VALUES (1, 'Resumo Expandido', null);
+INSERT INTO `envio-integraif`.modalidade (idModalidade, nome, descricao) VALUES (2, 'Relato de Experiência', null);

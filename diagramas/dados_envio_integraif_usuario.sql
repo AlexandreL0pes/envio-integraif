@@ -1,0 +1,6 @@
+INSERT INTO `envio-integraif`.usuario (idUsuario, nome, email, senha, cpf, telefone, admin) VALUES (1, 'Abstrato', null, null, null, null, null);
+INSERT INTO `envio-integraif`.usuario (idUsuario, nome, email, senha, cpf, telefone, admin) VALUES (2, 'Alexandre Ferreira Lopes', 'alexandre@gmail.com', '1234', '065.396.191-03', '(62) 9 8559-4955', 0);
+INSERT INTO `envio-integraif`.usuario (idUsuario, nome, email, senha, cpf, telefone, admin) VALUES (7, 'Alexandre Lopes', 'lopes@gmail.com', '1234', '999.999.999-03', '(22) 2 2222-2222', 1);
+INSERT INTO `envio-integraif`.usuario (idUsuario, nome, email, senha, cpf, telefone, admin) VALUES (9, 'as', '1@2', '1', '123.123.123-03', '1', 0);
+INSERT INTO `envio-integraif`.usuario (idUsuario, nome, email, senha, cpf, telefone, admin) VALUES (10, '1', 'alexandre@gmail.com', '1234', '063.121.113-09', '(62) 9 85594955', 0);
+INSERT INTO `envio-integraif`.usuario (idUsuario, nome, email, senha, cpf, telefone, admin) VALUES (11, 'teste', 'alexandre9999lopes@gmail.com', '123', '063.123.123-09', '(62) 9 85594955', 0);
