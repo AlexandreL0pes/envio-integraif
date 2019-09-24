@@ -81,10 +81,26 @@ class Trabalho extends CRUD
             }
         }
 
-        $retorno = [];        
+        $retorno = [];
 
         try {
             $retorno = $this->read(self::TABELA . " t ", $campos, $where_condicao, $where_valor, null, $ordem, $limite);
+        } catch (Exception $e) {
+            echo "Mensagem: " . $e->getMessage() . "\n Local: " . $e->getTraceAsString();
+        }
+
+        return $retorno;
+    }
+
+    public function selecionarTrabalho($idTrabalho)
+    {
+        $where_condicao = self::COL_ID_TRABALHO . " = ?";
+        $where_valor[] = $idTrabalho;
+
+        $retorno = [];
+
+        try {
+            $retorno = $this->read(self::TABELA, "*", $where_condicao, $where_valor, null, null, 1);
         } catch (Exception $e) {
             echo "Mensagem: " . $e->getMessage() . "\n Local: " . $e->getTraceAsString();
         }
