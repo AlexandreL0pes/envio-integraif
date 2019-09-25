@@ -281,7 +281,7 @@ class CRUD {
 
         $this->stmt = $this->conexao->prepare($sql);
 
-        for ($i = 1; $i <= count($where_valor); $i++) {
+        for ($i = 1; $i <= count((array)$where_valor); $i++) {
             $this->stmt->bindValue($i, $where_valor[$i - 1]);
         }
 

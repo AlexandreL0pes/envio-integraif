@@ -21,10 +21,14 @@ const eventos = () => {
             
             var form_data = new FormData();
             
+            let dNow = new Date();
+            datahora = "'" + dNow.getFullYear() + "-" + (dNow.getMonth()+1) + "-" + dNow.getDate() + " " + 
+            dNow.getHours() + ":" + dNow.getMinutes()  + ":" + dNow.getSeconds() + "'";
+
             form_data.append('titulo', titulo);
-            form_data.append('statusImpressao', "Não intresso");
-            form_data.append('statusPagamento', null);
-            form_data.append('datahora', null);
+            form_data.append('statusImpressao', 1);
+            form_data.append('statusPagamento', 2);
+            form_data.append('datahora', datahora);
             form_data.append('caminhoTrabalho', arquivo);
             form_data.append('idUsuario', idUsuario);
             
@@ -47,7 +51,7 @@ const eventos = () => {
             
             let dados = {
                 titulo: titulo,
-                statusImpressao: "Não intresso",
+                statusImpressao: null,
                 caminhoTrabalho: arquivo,
                 statusPagamento: null, 
                 datahora: null

@@ -77,7 +77,17 @@ class Trabalho extends CRUD
 
             if (isset($busca['statusPagamento']) && !empty($busca['statusPagamento'])) {
                 $where_condicao .= " AND " . self::COL_STATUS_PAGAMENTO . " = ?";
-                $where_valor = $busca['statusPagamento'];
+                $where_valor[] = $busca['statusPagamento'];
+            }
+
+            if (isset($busca['idUsuario']) && !empty($busca['idUsuario'])) {
+                $where_condicao .= " AND " . self::COL_ID_USUARIO . " = ?";
+                $where_valor[] = $busca['idUsuario'];
+            }
+
+            if (isset($busca['enviados']) && !empty($busca['enviados'])) {
+                $where_condicao .= " AND " . self::COL_ID_USUARIO . " != ?";
+                $where_valor[] = $busca['enviados'];
             }
         }
 

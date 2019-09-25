@@ -8,7 +8,7 @@ use core\model\Trabalho;
 
 class Trabalhos
 {
-
+    const LIMITE = 10;
 
     private $idTrabalho = null;
     private $titulo = null;
@@ -50,17 +50,14 @@ class Trabalhos
             if (move_uploaded_file($dados['tmp'], $arquivoServidor)) {
                 $dados[Trabalho::COL_CAMINHO_TRABALHO] = $arquivoServidor;
                 unset($dados['tmp']);
-
-
-                $trabalho->alterar($dados);
-                
-                echo "foi desgraçaaaaaaaaaaaaaaa";
-
-                return $trabalho;
             }
         }
 
-        
+        print_r($dados);
+
+        $trabalho->alterar($dados);
+
+        return $trabalho;        
     }
 
     public function listarTrabalhos($dados = []) {
@@ -68,15 +65,23 @@ class Trabalhos
 
         $busca = isset($dados['busca']) ? $dados['busca'] : [];
 
-        $lista = $trabalho->listar(null, $busca, Trabalho::COL_TITULO . " ASC");
+        if (isset($dados['pg']) && is_numeric($dados['pg'])) {
+            $limite = ($dados['pg'] - 1) * self::LIMITE . ", " . self::LIMITE;
+        } else {
+            $limite = self::LIMITE;
+        }
 
+        $lista = $trabalho->listar(null, $busca, Trabalho::COL_TITULO . " ASC", $limite);
+        $paginas = $trabalho->listar("COUNT(*) as total", $busca, null, null);
+        $this->__set("total_paginas", $paginas[0]->total);
         
         if (count($lista) > 0) {
             $this->__set("lista_trabalhos", $lista);       
         }
 
         return [
-            "lista_trabalhos" => $this->lista_trabalhos
+            "lista_trabalhos" => $this->lista_trabalhos,
+            "total_paginas" => ceil($this->total_paginas / self::LIMITE)
         ];
     }
 
