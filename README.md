@@ -1,4 +1,4 @@
-# ImpressVio IntegraiF Goiano
+# ImpressVio Integra IF Goiano
 
 Sistema WEB dedicado a envio de trabalhos para impressão dos mesmos em gráficas, inicialmente desenvolvido para o maior evento da rede IF Goiano, o Integra IF Goinao.
 
