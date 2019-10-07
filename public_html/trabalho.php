@@ -8,13 +8,25 @@ use core\controller\Trabalhos;
 
 $trabalhos = new Trabalhos();
 
-$dados = [];
-$trabalhos = $trabalhos->listarTrabalhos($dados);
-
 if(!Autenticacao::verificarLogin()) {
     header("Location: login.php");
+
 }
 
+$busca = [];
+if (isset($_GET['id'])) $busca['id'] = $_GET['id'];
+
+$trabalhos = new Trabalhos();
+
+$dados_trabalhos = [];
+
+if(count($busca) > 0) $dados_trabalhos['busca'] = $busca;
+
+$dados = $trabalhos->listarTrabalhos($dados_trabalhos);
+
+$dados = $dados['lista_trabalhos'][0];
+
+// print_r($dados);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -122,22 +134,21 @@ if(!Autenticacao::verificarLogin()) {
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="titulo">Título:</label>
-                            <input type="text" class="form-control" id="titulo" value="" placeholder="Insira o título" required autofocus>
+                            <input type="text" class="form-control" id="titulo" value="<?= $dados->titulo ?>" required autofocus disabled>
                         </div>
                     </div>
                     <hr>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-8">
                             <label for="autores">Autores:</label>
-                            <input type="text" class="form-control" id="autores" value="" placeholder="Ex.: João Ferreira da Silva; Maria Silva Ferreira; " required>
+                            <input type="text" class="form-control" id="autores" value="<?= $dados->autores ?>" required disabled>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="modalidade">Modalidade:</label>
                             <div class="input-group">
-                                <select class="custom-select" id="modalidade">
-                                    <option selected disabled>Selecione uma opção</option>
-                                    <option value="2">Relato de Experiência</option>
-                                    <option value="1">Resumo Expandido</option>
+                                <select class="custom-select" id="modalidade" disabled>
+                                    <option value="2" <?= $dados->idModalidade == 2 ? 'selected' : '' ?>>Relato de Experiência</option>
+                                    <option value="1" <?= $dados->idModalidade == 1 ? 'selected' : '' ?>>Resumo Expandido</option>
                                 </select>
                             </div>
                         </div>
