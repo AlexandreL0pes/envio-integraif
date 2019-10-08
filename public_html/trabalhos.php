@@ -4,14 +4,13 @@ require_once '../vendor/autoload.php';
 require_once '../config.php';
 
 use core\sistema\Autenticacao;
+use core\controller\Trabalhos;
 
 if (!Autenticacao::verificarLogin()) {
     header("Location:login.php");
 }
 
-use core\controller\Trabalhos;
 $trabalhos = new Trabalhos();
-
 
 if (Autenticacao::usuarioAdministrador()) {
     $pg = isset($_GET['pg']) ? $_GET['pg'] : null;
@@ -155,9 +154,10 @@ $trabalhos = $trabalhos->listarTrabalhos($dados);
                         </thead>
                         <tbody>
                             <?php if (count((array)$trabalhos["lista_trabalhos"][0]) > 0) {
+                                $cont = 1;
                                 foreach ($trabalhos["lista_trabalhos"] as $j => $trab) { ?>
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <th scope="row"><?= $cont++ ?></th>
                                     <td><?= $trab->titulo ?></td>
                                     <td><?= $trab->statusPagamento ?></td>
                                     <td><?= $trab->statusImpressao ?></td>

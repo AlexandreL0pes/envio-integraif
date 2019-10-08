@@ -89,6 +89,11 @@ class Trabalho extends CRUD
                 $where_condicao .= " AND " . self::COL_ID_USUARIO . " != ?";
                 $where_valor[] = $busca['enviados'];
             }
+
+            if (isset($busca['id']) && !empty($busca['id'])) {
+                $where_condicao .= " AND " . self::COL_ID_TRABALHO . " = ?";
+                $where_valor[] = $busca['id'];
+            }
         }
 
         $retorno = [];

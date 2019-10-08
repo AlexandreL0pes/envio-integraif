@@ -10,9 +10,8 @@ if (!Autenticacao::verificarLogin()) {
     // header("Location:login.php");
 }
 
-
 $busca = [];
-if(isset($_GET['texto'])) $busca['texto'] = $_GET['texto'];
+if (isset($_GET['autores'])) $busca['texto'] = $_GET['autores'];
 
 $trabalhos = new Trabalhos();
 
@@ -20,12 +19,9 @@ $dados_trabalhos = [];
 
 if(count($busca) > 0) $dados_trabalhos['busca'] = $busca;
 
-
 $dados = $trabalhos->listarTrabalhos($dados_trabalhos);
 
-print_r($dados);
-
-
+// print_r($dados);
 
 ?>
 
@@ -134,7 +130,11 @@ print_r($dados);
 
                     <h2 class="font-weight-bold">Trabalhos Aceitos</h2>
                     <h5 class="mb-5">Pesquise aqui seu trabalho para prosseguir com o envio.</h4>
-                    <form action="" id="filtrar">
+
+                    <form id="filtrar">
+                        <input type="text" id="pagamento" value="10" hidden>
+                        <input type="text" id="impressao" value="10" hidden>
+                        
                         <div class="form-row justify-content-center text-left">
                             <div class="form-group align-center col-md-8">
                                 <input type="text" class="form-control" id="autores" value="" placeholder="Digite aqui o título do trabalho ou o nome dos autores" required>
@@ -164,34 +164,21 @@ print_r($dados);
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Algum título Inútil como Todos os trabalhos desse evento terão, servindo apenas para identificação sem Qualquer outro propósito</td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-dark"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Algum título Inútil como Todos os trabalhos desse evento terão, servindo apenas para identificação sem Qualquer outro propósito</td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-dark"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
-                            </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Algum título Inútil como Todos os trabalhos desse evento terão, servindo apenas para identificação sem Qualquer outro propósito</td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-dark"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Algum título Inútil como Todos os trabalhos desse evento terão, servindo apenas para identificação sem Qualquer outro propósito</td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-dark"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
+                            <?php if (count((array)$dados["lista_trabalhos"][0]) > 0) {
+                                $cont = 1;
+                                foreach ($dados["lista_trabalhos"] as $j => $trab) { ?>
+                                <tr>
+                                    <th scope="row"><?= $cont++ ?></th>
+                                    <td><?= $trab->titulo ?></td>
+                                    <td>
+                                        <a href="trabalho.php?id=<?= $trab->idTrabalho ?>" class="btn btn-outline-dark"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            <?php } } else { ?>
+                                <tr>
+                                    <td colspan="3" class="align-text-center">Nenhum trabalho encontrado!</td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </section>
@@ -254,6 +241,7 @@ print_r($dados);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script src="assets/js/index.js"></script>
+    <script src="assets/js/pesquisar_trabalho.js"></script>
 </body>
 
 </html>
